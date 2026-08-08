@@ -1,0 +1,971 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Jorge Ben Jor | O Som do Brasil</title>
+
+    <style>
+        /* =========================
+           CONFIGURAÇÕES GERAIS
+        ========================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #050505;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Brilhos de fundo */
+
+        body::before {
+            content: "";
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: #fff4a3;
+            filter: blur(180px);
+            opacity: 0.12;
+            top: 10%;
+            left: -150px;
+            z-index: -1;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            width: 350px;
+            height: 350px;
+            background: #ffe96b;
+            filter: blur(170px);
+            opacity: 0.10;
+            bottom: 5%;
+            right: -150px;
+            z-index: -1;
+        }
+
+
+        /* =========================
+           MENU
+        ========================== */
+
+        header {
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 20px 8%;
+
+            background: rgba(0, 0, 0, 0.90);
+            backdrop-filter: blur(12px);
+
+            border-bottom: 1px solid rgba(255, 239, 133, 0.25);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            color: #fff5a8;
+
+            text-shadow:
+                0 0 5px #fff5a8,
+                0 0 15px #ffe86b;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #fff19a;
+            text-shadow: 0 0 10px #ffe76a;
+        }
+
+
+        /* =========================
+           CAPA PRINCIPAL
+        ========================== */
+
+        .hero {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 130px 10% 80px;
+
+            background:
+                radial-gradient(circle at 75% 50%,
+                rgba(255, 239, 128, 0.15),
+                transparent 35%),
+                #050505;
+        }
+
+        .hero-text {
+            max-width: 650px;
+        }
+
+        .mini-titulo {
+            color: #fff09a;
+            font-size: 16px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+
+            text-shadow: 0 0 12px #ffe66b;
+        }
+
+        .hero h1 {
+            font-size: clamp(55px, 8vw, 105px);
+            line-height: 0.9;
+            text-transform: uppercase;
+            letter-spacing: -5px;
+            margin-bottom: 30px;
+        }
+
+        .hero h1 span {
+            color: #fff19a;
+
+            text-shadow:
+                0 0 5px #fff19a,
+                0 0 15px #ffe66b,
+                0 0 35px rgba(255, 232, 100, 0.7);
+        }
+
+        .hero p {
+            color: #cfcfcf;
+            font-size: 19px;
+            line-height: 1.7;
+            max-width: 560px;
+        }
+
+        .botao {
+            display: inline-block;
+            margin-top: 35px;
+
+            padding: 15px 30px;
+
+            color: #000;
+            background: #fff19a;
+
+            border-radius: 30px;
+
+            text-decoration: none;
+            font-weight: bold;
+
+            box-shadow:
+                0 0 10px #fff19a,
+                0 0 30px rgba(255, 236, 116, 0.5);
+
+            transition: 0.3s;
+        }
+
+        .botao:hover {
+            transform: translateY(-5px) scale(1.03);
+
+            box-shadow:
+                0 0 15px #fff19a,
+                0 0 40px #ffe45e,
+                0 0 70px rgba(255, 228, 94, 0.5);
+        }
+
+
+        /* FOTO PRINCIPAL */
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image::before {
+            content: "";
+            position: absolute;
+            inset: -15px;
+
+            border: 1px solid #fff19a;
+            border-radius: 25px;
+
+            box-shadow:
+                0 0 15px #fff19a,
+                0 0 40px rgba(255, 232, 107, 0.3);
+
+            z-index: 0;
+        }
+
+        .hero-image img {
+            position: relative;
+            z-index: 1;
+
+            width: 360px;
+            height: 500px;
+
+            object-fit: cover;
+
+            border-radius: 18px;
+
+            filter: grayscale(100%) contrast(1.1);
+
+            box-shadow:
+                15px 15px 0 #fff19a,
+                0 0 35px rgba(255, 234, 100, 0.25);
+
+            transition: 0.5s;
+        }
+
+        .hero-image img:hover {
+            filter: grayscale(0%);
+            transform: scale(1.03);
+        }
+
+
+        /* =========================
+           SEÇÕES
+        ========================== */
+
+        section {
+            padding: 100px 10%;
+        }
+
+        .titulo-secao {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .titulo-secao span {
+            color: #fff19a;
+            font-size: 14px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+
+            text-shadow: 0 0 10px #ffe96b;
+        }
+
+        .titulo-secao h2 {
+            margin-top: 10px;
+            font-size: 45px;
+            text-transform: uppercase;
+        }
+
+        .linha {
+            width: 80px;
+            height: 3px;
+            margin: 20px auto;
+
+            background: #fff19a;
+
+            box-shadow:
+                0 0 8px #fff19a,
+                0 0 20px #ffe56a;
+        }
+
+
+        /* =========================
+           BIOGRAFIA
+        ========================== */
+
+        .biografia {
+            background: #0b0b0b;
+        }
+
+        .bio-container {
+            max-width: 950px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+
+            align-items: center;
+        }
+
+        .bio-text p {
+            color: #cfcfcf;
+            font-size: 18px;
+            line-height: 1.9;
+            margin-bottom: 20px;
+        }
+
+        .bio-text strong {
+            color: #fff19a;
+        }
+
+        .bio-card {
+            padding: 35px;
+
+            background: #111;
+
+            border: 1px solid rgba(255, 241, 154, 0.3);
+            border-radius: 20px;
+
+            box-shadow:
+                0 0 20px rgba(255, 235, 110, 0.08);
+        }
+
+        .bio-card h3 {
+            color: #fff19a;
+            font-size: 25px;
+            margin-bottom: 20px;
+        }
+
+        .bio-card p {
+            color: #aaa;
+            line-height: 1.7;
+        }
+
+
+        /* =========================
+           MÚSICAS
+        ========================== */
+
+        .musicas {
+            background: #050505;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            position: relative;
+
+            padding: 35px;
+
+            background: #101010;
+
+            border: 1px solid #272727;
+            border-radius: 18px;
+
+            transition: 0.4s;
+
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+
+            width: 100px;
+            height: 100px;
+
+            background: #fff19a;
+            filter: blur(70px);
+            opacity: 0;
+
+            top: -30px;
+            right: -30px;
+
+            transition: 0.4s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+
+            border-color: #fff19a;
+
+            box-shadow:
+                0 0 20px rgba(255, 238, 126, 0.15);
+        }
+
+        .card:hover::before {
+            opacity: 0.4;
+        }
+
+        .numero {
+            color: #fff19a;
+            font-size: 14px;
+            letter-spacing: 3px;
+        }
+
+        .card h3 {
+            margin: 20px 0 12px;
+            font-size: 24px;
+        }
+
+        .card p {
+            color: #999;
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           GALERIA
+        ========================== */
+
+        .galeria {
+            background: #0b0b0b;
+        }
+
+        .galeria-grid {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .foto {
+            height: 400px;
+
+            overflow: hidden;
+
+            border-radius: 15px;
+
+            border: 1px solid #292929;
+
+            position: relative;
+        }
+
+        .foto img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            filter: grayscale(100%) contrast(1.15);
+
+            transition: 0.6s;
+        }
+
+        .foto:hover img {
+            transform: scale(1.08);
+
+            filter:
+                grayscale(100%)
+                contrast(1.2)
+                brightness(1.05);
+        }
+
+        .foto::after {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    transparent 50%,
+                    rgba(0,0,0,0.75)
+                );
+
+            pointer-events: none;
+        }
+
+        .legenda {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+
+            z-index: 2;
+
+            color: #fff19a;
+
+            font-weight: bold;
+
+            text-shadow: 0 0 10px #000;
+        }
+
+
+        /* =========================
+           FRASE
+        ========================== */
+
+        .frase {
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #fff19a,
+                    #f4df69
+                );
+
+            color: #000;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .frase::before {
+            content: "♫";
+
+            position: absolute;
+
+            font-size: 250px;
+
+            opacity: 0.08;
+
+            left: 5%;
+            top: -50px;
+        }
+
+        .frase h2 {
+            font-size: 45px;
+            max-width: 900px;
+            margin: auto;
+
+            text-transform: uppercase;
+        }
+
+        .frase p {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+
+        /* =========================
+           RODAPÉ
+        ========================== */
+
+        footer {
+            padding: 35px;
+
+            background: #000;
+
+            text-align: center;
+
+            color: #777;
+
+            border-top: 1px solid #222;
+        }
+
+        footer strong {
+            color: #fff19a;
+
+            text-shadow:
+                0 0 8px #fff19a;
+        }
+
+
+        /* =========================
+           RESPONSIVO
+        ========================== */
+
+        @media (max-width: 900px) {
+
+            header {
+                padding: 18px 5%;
+            }
+
+            nav {
+                gap: 12px;
+            }
+
+            nav a {
+                font-size: 13px;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 150px;
+            }
+
+            .hero p {
+                margin: auto;
+            }
+
+            .hero-image {
+                margin-top: 50px;
+            }
+
+            .bio-container {
+                grid-template-columns: 1fr;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .galeria-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .titulo-secao h2 {
+                font-size: 35px;
+            }
+        }
+
+        @media (max-width: 550px) {
+
+            header {
+                position: relative;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero {
+                padding-top: 80px;
+            }
+
+            .hero h1 {
+                font-size: 55px;
+            }
+
+            .hero-image img {
+                width: 280px;
+                height: 390px;
+            }
+
+            section {
+                padding: 70px 7%;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!-- =========================
+         MENU
+    ========================== -->
+
+    <header>
+
+        <div class="logo">
+            JBJ
+        </div>
+
+        <nav>
+            <a href="#inicio">Início</a>
+            <a href="#biografia">História</a>
+            <a href="#musicas">Músicas</a>
+            <a href="#galeria">Galeria</a>
+        </nav>
+
+    </header>
+
+
+    <!-- =========================
+         CAPA
+    ========================== -->
+
+    <section class="hero" id="inicio">
+
+        <div class="hero-text">
+
+            <div class="mini-titulo">
+                O som do Brasil
+            </div>
+
+            <h1>
+                Jorge<br>
+                <span>Ben Jor</span>
+            </h1>
+
+            <p>
+                O balanço, a guitarra e a criatividade de um dos
+                maiores nomes da música brasileira.
+            </p>
+
+            <a href="#biografia" class="botao">
+                Conheça sua história →
+            </a>
+
+        </div>
+
+
+        <div class="hero-image">
+
+            <img
+                src="https://commons.wikimedia.org/wiki/Special:FilePath/Jorge%20Ben%20Jor%20at%20Live%20Earth.jpg"
+                alt="Jorge Ben Jor">
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         BIOGRAFIA
+    ========================== -->
+
+    <section class="biografia" id="biografia">
+
+        <div class="titulo-secao">
+
+            <span>Sobre o artista</span>
+
+            <h2>Uma história musical</h2>
+
+            <div class="linha"></div>
+
+        </div>
+
+
+        <div class="bio-container">
+
+            <div class="bio-text">
+
+                <p>
+                    <strong>Jorge Ben Jor</strong> é um dos artistas
+                    mais importantes da música popular brasileira.
+                    Sua carreira ganhou destaque a partir da década
+                    de 1960.
+                </p>
+
+                <p>
+                    Seu som mistura elementos de
+                    <strong>samba, rock, funk, soul e ritmos
+                    brasileiros</strong>, criando uma identidade
+                    musical única.
+                </p>
+
+                <p>
+                    Com seu jeito marcante de tocar violão e suas
+                    composições cheias de ritmo, Jorge Ben Jor
+                    conquistou gerações de fãs no Brasil e no mundo.
+                </p>
+
+            </div>
+
+
+            <div class="bio-card">
+
+                <h3>Você sabia?</h3>
+
+                <p>
+                    Jorge Ben Jor é conhecido por sucessos como
+                    "Mas Que Nada", "País Tropical", "Taj Mahal",
+                    "Fio Maravilha" e "W/Brasil".
+                </p>
+
+                <br>
+
+                <p>
+                    Suas músicas ajudaram a aproximar diferentes
+                    estilos musicais e influenciaram diversos
+                    artistas brasileiros.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         MÚSICAS
+    ========================== -->
+
+    <section class="musicas" id="musicas">
+
+        <div class="titulo-secao">
+
+            <span>Discografia</span>
+
+            <h2>Grandes sucessos</h2>
+
+            <div class="linha"></div>
+
+        </div>
+
+
+        <div class="cards">
+
+            <div class="card">
+                <span class="numero">01 — CLÁSSICO</span>
+
+                <h3>Mas Que Nada</h3>
+
+                <p>
+                    Um dos maiores clássicos da música brasileira,
+                    conhecido internacionalmente.
+                </p>
+            </div>
+
+
+            <div class="card">
+                <span class="numero">02 — BRASIL</span>
+
+                <h3>País Tropical</h3>
+
+                <p>
+                    Uma música alegre e marcante que celebra
+                    a cultura brasileira.
+                </p>
+            </div>
+
+
+            <div class="card">
+                <span class="numero">03 — CLÁSSICO</span>
+
+                <h3>Taj Mahal</h3>
+
+                <p>
+                    Uma das melodias mais reconhecíveis da
+                    carreira de Jorge Ben Jor.
+                </p>
+            </div>
+
+
+            <div class="card">
+                <span class="numero">04 — FUTEBOL</span>
+
+                <h3>Fio Maravilha</h3>
+
+                <p>
+                    Música inspirada no jogador de futebol
+                    João Batista de Sales.
+                </p>
+            </div>
+
+
+            <div class="card">
+                <span class="numero">05 — SUCESSO</span>
+
+                <h3>W/Brasil</h3>
+
+                <p>
+                    Um dos grandes sucessos da fase mais
+                    popular do artista.
+                </p>
+            </div>
+
+
+            <div class="card">
+                <span class="numero">06 — SAMBA</span>
+
+                <h3>O Telefone Tocou</h3>
+
+                <p>
+                    Mais uma composição que mostra a
+                    criatividade e o ritmo do artista.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         GALERIA
+    ========================== -->
+
+    <section class="galeria" id="galeria">
+
+        <div class="titulo-secao">
+
+            <span>Memórias</span>
+
+            <h2>Galeria</h2>
+
+            <div class="linha"></div>
+
+        </div>
+
+
+        <div class="galeria-grid">
+
+            <div class="foto">
+
+                <img
+                    src="https://commons.wikimedia.org/wiki/Special:FilePath/Jorge%20Ben%20Jor%20at%20Live%20Earth.jpg"
+                    alt="Jorge Ben Jor">
+
+                <div class="legenda">
+                    Jorge Ben Jor
+                </div>
+
+            </div>
+
+
+            <div class="foto">
+
+                <img
+                    src="https://commons.wikimedia.org/wiki/Special:FilePath/Jorge%20ben%20jor%20%40%20sesc%20bauru%20%284465425415%29.jpg"
+                    alt="Jorge Ben Jor no palco">
+
+                <div class="legenda">
+                    No palco
+                </div>
+
+            </div>
+
+
+            <div class="foto">
+
+                <img
+                    src="https://commons.wikimedia.org/wiki/Special:FilePath/Jorge%20Ben%20e%20o%20Trio%20Mocot%C3%B3%20no%20Teatro%20da%20Lagoa%2C%201971.jpg"
+                    alt="Jorge Ben e Trio Mocotó">
+
+                <div class="legenda">
+                    Jorge Ben & Trio Mocotó
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FRASE FINAL
+    ========================== -->
+
+    <section class="frase">
+
+        <h2>
+            Música, balanço<br>
+            e brasilidade.
+        </h2>
+
+        <p>
+            Jorge Ben Jor — uma marca inesquecível
+            na música brasileira.
+        </p>
+
+    </section>
+
+
+    <!-- =========================
+         RODAPÉ
+    ========================== -->
+
+    <footer>
+
+        <p>
+            Página dedicada a
+            <strong>Jorge Ben Jor</strong> ♫
+        </p>
+
+    </footer>
+
+
+</body>
+</html>
+```
